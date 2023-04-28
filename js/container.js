@@ -84,8 +84,10 @@
                 translateX : -SlowTrans
             });
         }
-        document.addEventListener("mousemove", mouseDecoText);
-        document.addEventListener("mousemove", mouseDecoInner);
+        document.addEventListener("mousemove", function(e){
+            mouseDecoText(e);
+            mouseDecoInner(e);
+        });
         //mouse move text animation end
 
         //gunami pf end -----------------------------------------------------------------------------------
