@@ -33,7 +33,7 @@
             transYZero = {translateY:0};
         var skewYLinkItem = gsap.quickSetter(".link_item", "skewY", "deg"),
             transYPofolItem = gsap.quickSetter(".pofol_item", "translateY", "px");
-        var clampSkewY = gsap.utils.clamp(-25, 25),
+        var clampSkewY = gsap.utils.clamp(-35, 35),
             clampTransY = gsap.utils.clamp(-100, 100);
         ScrollTrigger.create({
             onUpdate : (self) => {
@@ -42,7 +42,7 @@
                     skewYZero.skewY = wheelSkewY;
                     gsap.to(skewYZero, {
                         skewY : 0,
-                        duration : 1.5,
+                        duration : 1,
                         ease : "Circ.easeOut",
                         overwrite : true,
                         onUpdate : () => skewYLinkItem(skewYZero.skewY)
