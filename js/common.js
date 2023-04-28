@@ -214,6 +214,22 @@
         requestAnimationFrame(updateTextPosition);
         //header title end
 
+        //gunamiMouse start
+        var GunamiMouse = document.querySelector("#GunamiMouse");
+        var $AllButton = $(".link_item .link_btn");
+        function gunamiMouseMove(e){
+            var MouseX = e.pageX,
+                MouseY = e.pageY;
+            gsap.to(GunamiMouse, {
+                duration : 0.6,
+                ease : "back.easeOut.config(1.7)",
+                top : MouseY,
+                left : MouseX
+            });
+        }
+        window.addEventListener("mousemove", gunamiMouseMove);
+        //gunamiMouse end
+
         //gunami pf end -----------------------------------------------------------------------------------
     });
 

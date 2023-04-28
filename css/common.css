@@ -39,6 +39,20 @@ input[type="submit"]{cursor:pointer;}
 .menu.eachdown .depth2{position:absolute;bottom:0;left:0;width:100%;}
 .menu.dropdown .depth2{position:absolute;top:100%;left:0;width:100%;transform-origin:center top;transform:scaleY(0);}
 
+/* gunamiMouse */
+html, html *:hover, html *:focus, html [type="button"], html button, html a{cursor:none;}
+@keyframes mouse-animation {
+    0%, 100% {border-radius:30% 70% 70% 30% / 30% 30% 70% 70%}
+    25% {border-radius:58% 42% 75% 25% / 76% 46% 54% 24%}
+    50% {border-radius:50% 50% 33% 67% / 55% 27% 73% 45%}
+    75% {border-radius:33% 67% 58% 42% / 63% 68% 32% 37%}
+}
+#GunamiMouse{display:block;position:absolute;z-index:1000;top:50%;left:50%;width:15vw;height:15vw;background-color:rgba(0, 0, 0, 0.1);border-width:10px;border-style:solid;border-color:rgb(166, 202, 7);overflow:hidden;box-sizing:border-box;transform:translate(-50%, -50%) scale(1);transition-property:width, height, border-color, transform;transition-duration:400ms;transition-timing-function:cubic-bezier(.52,.08,.04,1.18);}
+#GunamiMouse{animation-name:mouse-animation;animation-duration:2000ms;animation-iteration-count:infinite;animation-direction:alternate;}
+#GunamiMouse:before{display:block;position:absolute;top:0;left:0;width:100%;height:100%;backdrop-filter:hue-rotate(80deg);content:'';box-sizing:border-box;}
+.wheel_start #GunamiMouse{width:30vw;height:30vw;border-color:rgba(30, 11, 240, 0.7);}
+
+
 /* wrapper, wrap */
 #wrapper{display:block;position:static;width:100%;padding-left:12vw;box-sizing:border-box;transition-property:padding-left;transition-duration:400ms;transition-timing-function:cubic-bezier(.52,.08,.04,1.18);}
 #wrapper:before{display:block;position:absolute;top:0;left:0;width:12vw;height:100%;background-color:rgba(0, 0, 0, 0.5);content:'';box-sizing:border-box;transform:translateX(0px);transition-property:transform;transition-duration:400ms;transition-timing-function:cubic-bezier(.52,.08,.04,1.18);}
