@@ -163,73 +163,61 @@
         //gunami pf start -----------------------------------------------------------------------------------
 
         //header title start
-        const mouse = newV2();
-        const center = newV2();
-        const distanceFromCenter = newV2();
-        const distanceLerped = newV2();
-        let simulateMouseMovement = true;
-        const perspective = 500;
-        const translateZ = -12;
-        const rotate = 3;
-        const skew = 3;
-        const header = document.getElementById("header");
-        const copies = document.getElementsByClassName("header_title_copy");
-        function updateCenter() {
-            const rect = header.getBoundingClientRect();
+        var center = xyZeroSet();
+        var distanceCenter = xyZeroSet();
+        var distanceXY = xyZeroSet();
+        var simulateMouseMovement = true;
+        var perspective = 100;
+        var translateZ = -12;
+        var rotate = 3;
+        var skew = 3;
+        var header = document.getElementById("header");
+        var copies = document.getElementsByClassName("header_title_copy");
+        function headerGetCenter() {
+            var rect = header.getBoundingClientRect();
             center.x = rect.left + rect.width / 2;
             center.y = rect.top + rect.height / 2;
         }
-        function trackMousePosition(event) {
-            simulateMouseMovement = false;
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-            distanceFromCenter.x = center.x - mouse.x;
-            distanceFromCenter.y = center.y + mouse.y;
-        }
         function fakeMousePosition(t) {
-            distanceFromCenter.x = Math.sin(t / 500) * window.innerWidth * 0.5;
-            distanceFromCenter.y = Math.cos(t / 500) * window.innerWidth * 0.2;
+            distanceCenter.x = Math.sin(t / 500) * window.innerWidth * 0.5;
+            distanceCenter.y = Math.cos(t / 500) * window.innerWidth * 0.2;
         }
         function updateTextPosition(t) {
             if (simulateMouseMovement) fakeMousePosition(t);
-            lerpV2(distanceLerped, distanceFromCenter);
+            xyPositionSet(distanceXY, distanceCenter);
             for (var i = 1; i < copies.length + 1; i++) {
-                const copy = copies[i - 1];
-                copy.style.transform = makeTransformString(
-                    i * distanceLerped.y * 0.03,
+                var copy = copies[i - 1];
+                copy.style.transform = stringAnimation(
+                    i * distanceXY.y * 0.03,
                     i * translateZ,
-                    i * rotate * (distanceLerped.x * 0.003),
-                    i * skew * (distanceLerped.x * 0.003)
+                    i * rotate * (distanceXY.x * 0.005),
+                    i * skew * (distanceXY.x * 0.005)
                 );
             }
             requestAnimationFrame(updateTextPosition);
         }
-        function makeTransformString(y, z, rotate, skew) {
+        function stringAnimation(y, z, rotate, skew) {
             return `perspective(${perspective}px) translate3d(0px, ${y}px, ${z}px) rotate(${rotate}deg) skew(${skew}deg)`;
         }
-        function lerpV2(position, targetPosition) {
+        function xyPositionSet(position, targetPosition) {
             position.x += (targetPosition.x - position.x) * 0.2;
             position.y += (targetPosition.y - position.y) * 0.2;
         }
-        function newV2(x = 0, y = 0) {
+        function xyZeroSet(x = 0, y = 0) {
             return {
                 x : x,
                 y : y
             };
         }
-        updateCenter();
-        //document.addEventListener("mousemove", trackMousePosition);
-        window.addEventListener("resize", updateCenter);
+        headerGetCenter();
+        window.addEventListener("resize", headerGetCenter);
         requestAnimationFrame(updateTextPosition);
         //header title end
 
-        //footer verti_inner start
-
-        //footer verti_inner end
         //gunami pf end -----------------------------------------------------------------------------------
     });
 
-    $document.on('ready', function (event) {
+    $document.on('ready', function(event) {
         $screen({
             state: [{
                 name: 'wide',
@@ -240,7 +228,7 @@
             }, {
                 name: 'web',
                 horizontal: {
-                    from: 1500,
+                    from: 1600,
                     to: 1001
                 }
             }, {
@@ -258,7 +246,7 @@
             }]
         });
     });
-    $window.on('load', function (event) {
+    $window.on('load', function(event) {
         $window.on('screen:resize', function (event) {
 
         }).triggerHandler('screen:resize');
