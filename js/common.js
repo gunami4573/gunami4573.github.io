@@ -162,6 +162,14 @@
 
         //gunami pf start -----------------------------------------------------------------------------------
 
+        //body ripple start
+        $('body').ripples({
+            resolution : 100,
+            dropRadius : 200,
+            perturbance : 0.003
+        });
+        //body ripple end
+
         //header title start
         var center = xyZeroSet();
         var distanceCenter = xyZeroSet();
